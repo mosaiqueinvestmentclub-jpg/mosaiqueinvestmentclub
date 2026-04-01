@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mosaique Investment Club — Connexion</title>
+  <style>
+    :root {
+      --bg: #f1ede7;
+      --bg-soft: #f7f3ee;
+      --text: #171411;
+      --muted: #6d655d;
+      --line: rgba(23, 20, 17, 0.10);
+      --line-soft: rgba(255,255,255,0.08);
+      --deep: #181614;
+      --bronze: #8c6a43;
+      --shadow: 0 24px 70px rgba(24, 22, 20, 0.10);
+      --shadow-soft: 0 18px 40px rgba(24, 22, 20, 0.08);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(140,106,67,0.08), transparent 25%),
+        radial-gradient(circle at bottom right, rgba(24,22,20,0.05), transparent 30%),
+        linear-gradient(135deg, var(--bg) 0%, var(--bg-soft) 100%);
+      padding: 24px;
+    }
+    .frame {
+      max-width: 1460px; margin:0 auto; min-height: calc(100vh - 48px);
+      border-radius: 42px; overflow:hidden; border:1px solid rgba(255,255,255,0.58);
+      background: rgba(255,255,255,0.34); box-shadow: var(--shadow); backdrop-filter: blur(16px);
+      display:grid; grid-template-columns: 1.14fr 0.86fr;
+    }
+    .left {
+      position:relative; background: linear-gradient(180deg, rgba(24,22,20,0.98), rgba(24,22,20,0.93));
+      color:#f8f3ec; padding:62px 64px; display:flex; flex-direction:column; justify-content:space-between;
+    }
+    .topbar {
+      display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;
+      padding-bottom:28px; border-bottom:1px solid var(--line-soft);
+    }
+    .brand { display:flex; align-items:center; gap:16px; }
+    .logo {
+      width:62px; height:62px; border-radius:20px; background: linear-gradient(135deg, #9c7850, #6f5232);
+      color:white; display:flex; align-items:center; justify-content:center; font-size:.95rem; font-weight:800;
+      letter-spacing:.12em; box-shadow:0 16px 34px rgba(140,106,67,0.28);
+    }
+    .brand h1 { font-size:1.12rem; margin-bottom:3px; font-weight:650; }
+    .brand p { color:rgba(248,243,236,.62); font-size:.92rem; }
+    .status {
+      padding:10px 14px; border:1px solid rgba(255,255,255,0.10); background:rgba(255,255,255,0.04);
+      border-radius:999px; font-size:.76rem; color:rgba(248,243,236,0.74); letter-spacing:.10em; text-transform:uppercase;
+    }
+    .hero { max-width:690px; padding:56px 0 38px; }
+    .kicker { display:inline-block; margin-bottom:24px; color:#d7c1a4; font-size:.82rem; letter-spacing:.16em; text-transform:uppercase; }
+    .hero h2 { font-family:Georgia, "Times New Roman", serif; font-size:clamp(3rem,5vw,5.4rem); line-height:.94; letter-spacing:-.05em; font-weight:600; margin-bottom:26px; }
+    .hero p { max-width:610px; color:rgba(248,243,236,.74); font-size:1.02rem; line-height:1.95; }
+    .stats {
+      display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; padding-top:28px; border-top:1px solid var(--line-soft);
+    }
+    .stat-card {
+      border-radius:22px; padding:20px 20px 18px; background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border:1px solid rgba(255,255,255,0.08); min-height:168px;
+    }
+    .stat-card small { display:block; color:rgba(248,243,236,.56); font-size:.76rem; letter-spacing:.08em; text-transform:uppercase; margin-bottom:12px; }
+    .stat-card strong { display:block; font-size:1.08rem; font-weight:640; margin-bottom:10px; line-height:1.25; }
+    .stat-card span { color:rgba(248,243,236,.66); font-size:.86rem; line-height:1.65; }
+    .right {
+      background: linear-gradient(180deg, rgba(253,251,248,0.90), rgba(249,245,239,0.88));
+      padding:54px 46px; display:flex; align-items:center; justify-content:center;
+    }
+    .login-wrap { width:100%; max-width:500px; }
+    .panel-label { color:var(--bronze); font-size:.8rem; letter-spacing:.16em; text-transform:uppercase; margin-bottom:14px; display:inline-block; }
+    .panel-title { font-family:Georgia, "Times New Roman", serif; font-size:2.85rem; line-height:.98; letter-spacing:-.045em; margin-bottom:14px; font-weight:600; }
+    .panel-text { color:var(--muted); font-size:.97rem; line-height:1.85; margin-bottom:30px; max-width:440px; }
+    .login-card {
+      background: rgba(255,255,255,0.72); border:1px solid rgba(255,255,255,0.82); border-radius:32px; padding:34px;
+      box-shadow: var(--shadow-soft); backdrop-filter: blur(14px);
+    }
+    .field { margin-bottom:16px; }
+    .field label { display:block; margin-bottom:8px; font-size:.84rem; font-weight:700; letter-spacing:.03em; color:#2e2924; }
+    .input {
+      width:100%; height:58px; border-radius:18px; border:1px solid rgba(23,20,17,0.09); background:rgba(255,255,255,0.92);
+      padding:0 18px; font-size:.96rem; color:var(--text); outline:none; box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
+    }
+    .row { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin:10px 0 24px; }
+    .remember { display:flex; align-items:center; gap:10px; color:var(--muted); font-size:.9rem; }
+    .remember input { accent-color:#7b5e3d; }
+    .button {
+      width:100%; height:60px; border:none; border-radius:20px; background:linear-gradient(135deg, #181614, #2b2722);
+      color:#f8f3ec; font-size:.97rem; font-weight:700; cursor:pointer; box-shadow:0 18px 36px rgba(24,22,20,0.15);
+    }
+    .footnote { margin-top:20px; color:var(--muted); text-align:center; font-size:.82rem; line-height:1.7; }
+    .error { margin-top:14px; color:#9d3f33; font-size:.9rem; display:none; }
+    @media (max-width: 1160px) {
+      .frame { grid-template-columns:1fr; }
+      .left,.right { padding:38px; }
+    }
+    @media (max-width: 760px) {
+      body { padding:12px; }
+      .left,.right,.login-card { padding:24px; }
+      .stats { grid-template-columns:1fr; }
+      .panel-title { font-size:2.1rem; }
+      .hero h2 { font-size:2.7rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <section class="left">
+      <div class="topbar">
+        <div class="brand">
+          <div class="logo">MIC</div>
+          <div>
+            <h1>Mosaique Investment Club</h1>
+            <p>Espace privé réservé aux membres du club</p>
+          </div>
+        </div>
+        <div class="status">Accès privé</div>
+      </div>
+      <div class="hero">
+        <span class="kicker">Club privé d’investissement</span>
+        <h2>Accédez à l’espace confidentiel du Mosaique Investment Club.</h2>
+        <p>Mosaique Investment Club est un club d’investissement structuré sous forme d’indivision, composé de 12 membres aux parcours complémentaires. Le collectif réunit des profils issus du droit, de la finance, de l’économie et de l’ingénierie.</p>
+      </div>
+      <div class="stats">
+        <div class="stat-card"><small>Board</small><strong>Droits d’administration</strong><span>Le board peut modifier les positions, enregistrer les transactions, gérer la trésorerie et mettre à jour les documents internes.</span></div>
+        <div class="stat-card"><small>Membres</small><strong>Accès en lecture</strong><span>Les membres peuvent consulter le portefeuille, les performances et les documents autorisés, sans pouvoir modifier les données.</span></div>
+        <div class="stat-card"><small>Sécurité</small><strong>Accès séparés</strong><span>Chaque compte est rattaché à un rôle précis afin d’assurer une séparation claire entre la gestion du club et la simple consultation.</span></div>
+      </div>
+    </section>
+    <section class="right">
+      <div class="login-wrap">
+        <span class="panel-label">Connexion privée</span>
+        <h2 class="panel-title">Se connecter au club</h2>
+        <p class="panel-text">Identifiez-vous pour accéder à votre espace Mosaique Investment Club. Les autorisations appliquées dépendront automatiquement de votre rôle.</p>
+        <div class="login-card">
+          <form id="login-form">
+            <div class="field">
+              <label for="username">Identifiant</label>
+              <input id="username" class="input" type="text" placeholder="Entrez votre identifiant" required />
+            </div>
+            <div class="field">
+              <label for="password">Mot de passe</label>
+              <input id="password" class="input" type="password" placeholder="••••••••••••" required />
+            </div>
+            <div class="row">
+              <label class="remember"><input type="checkbox" /><span>Rester connecté</span></label>
+            </div>
+            <button type="submit" class="button">Connexion sécurisée</button>
+            <div class="error" id="error-msg"></div>
+          </form>
+          <div class="footnote">Accès strictement réservé aux utilisateurs autorisés du Mosaique Investment Club.</div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    const form = document.getElementById('login-form');
+    const errorMsg = document.getElementById('error-msg');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorMsg.style.display = 'none';
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+      try {
+        const response = await fetch('/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          errorMsg.textContent = data.message || 'Erreur de connexion';
+          errorMsg.style.display = 'block';
+          return;
+        }
+        localStorage.setItem('mic_token', data.token);
+        localStorage.setItem('mic_role', data.user.role);
+        localStorage.setItem('mic_name', data.user.name);
+        window.location.href = '/dashboard.html';
+      } catch {
+        errorMsg.textContent = 'Erreur serveur';
+        errorMsg.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>

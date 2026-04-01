@@ -1,0 +1,256 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "board_admin",
+      "password": "mosaique123",
+      "name": "Board Admin",
+      "role": "board"
+    },
+    {
+      "id": 2,
+      "username": "member_access",
+      "password": "mosaique123",
+      "name": "Member Access",
+      "role": "member"
+    }
+  ],
+  "portfolio": {
+    "summary": {
+      "realizedPnL": -3.44,
+      "dividends": 0
+    },
+    "positions": [
+      {
+        "id": 4,
+        "name": "iShares MSCI AC Far East ex-Japan UCITS ETF USD",
+        "ticker": "IFFF.AS",
+        "yahooSymbol": "IFFF.AS",
+        "type": "ETF",
+        "currency": "EUR",
+        "quantity": 1,
+        "avgPrice": 1,
+        "isin": "IE00B0M63730"
+      },
+      {
+        "id": 5,
+        "name": "iShares EURO STOXX Mid UCITS ETF",
+        "ticker": "DJMC.SW",
+        "yahooSymbol": "DJMC.SW",
+        "type": "ETF",
+        "currency": "EUR",
+        "quantity": 1,
+        "avgPrice": 1,
+        "isin": "IE00B02KXL92"
+      },
+      {
+        "id": 6,
+        "name": "BNP Paribas Funds Brazil Equity",
+        "ticker": "0P00007ZH9",
+        "yahooSymbol": "0P00007ZH9",
+        "type": "MUTUALFUND",
+        "currency": "USD",
+        "quantity": 1,
+        "avgPrice": 91.32,
+        "isin": ""
+      }
+    ],
+    "transactions": [
+      {
+        "id": 76,
+        "date": "2026-03-20",
+        "asset": "Cash",
+        "ticker": "CASH",
+        "type": "Frais",
+        "quantity": null,
+        "amount": 0.13,
+        "fees": 0,
+        "currency": "EUR",
+        "note": "Frais de courtage"
+      },
+      {
+        "id": 75,
+        "date": "2026-03-20",
+        "asset": "Cash",
+        "ticker": "CASH",
+        "type": "Dépôt",
+        "quantity": null,
+        "amount": 3400,
+        "fees": 0,
+        "currency": "EUR",
+        "note": "Versements membres"
+      },
+      {
+        "id": 60,
+        "date": "2026-02-28",
+        "asset": "iShares MSCI AC Far East ex-Japan UCITS ETF USD",
+        "ticker": "MSCI AC FAR EAST",
+        "type": "Achat",
+        "quantity": 10,
+        "amount": 744.6,
+        "fees": 0,
+        "currency": "EUR",
+        "note": "MSCI AC FAR EAST (IE00B0M63730)",
+        "isin": "IE00B0M63730"
+      },
+      {
+        "id": 59,
+        "date": "2026-02-28",
+        "asset": "iShares EURO STOXX Mid UCITS ETF",
+        "ticker": "ISHARES ESTOXX MID",
+        "type": "Achat",
+        "quantity": 2,
+        "amount": 173.37,
+        "fees": 0,
+        "currency": "EUR",
+        "note": "ISHARES ESTOXX MID (IE00B02KXL92)",
+        "isin": "IE00B02KXL92"
+      },
+      {
+        "id": 58,
+        "date": "2026-02-28",
+        "asset": "Vanguard S&P 500 UCITS ETF USD Accumulation",
+        "ticker": "VANGUARD SP500 ETF",
+        "type": "Achat",
+        "quantity": 12,
+        "amount": 1351.34,
+        "fees": 0,
+        "currency": "EUR",
+        "note": "VANGUARD SP500 ETF (IE00B3XXRP09)",
+        "isin": "IE00B3XXRP09"
+      },
+      {
+        "id": 57,
+        "date": "2026-02-28",
+        "asset": "iShares MSCI AC Far East ex-Japan UCITS ETF USD",
+        "ticker": "MSCI AC FAR EAST",
+        "type": "Achat",
+        "quantity": 3,
+        "amount": 213.01,
+        "fees": 0,
+        "currency": "EUR",
+        "note": "MSCI AC FAR EAST (IE00B0M63730)",
+        "isin": "IE00B0M63730"
+      },
+      {
+        "id": 56,
+        "date": "2026-02-28",
+        "asset": "iShares EURO STOXX Mid UCITS ETF",
+        "ticker": "ISHARES ESTOXX MID",
+        "type": "Vente",
+        "quantity": 3,
+        "amount": 251.72,
+        "fees": 0,
+        "currency": "EUR",
+        "note": "ISHARES ESTOXX MID (IE00B02KXL92)",
+        "isin": "IE00B02KXL92"
+      },
+      {
+        "id": 55,
+        "date": "2026-02-28",
+        "asset": "iShares EURO STOXX Mid UCITS ETF",
+        "ticker": "ISHARES ESTOXX MID",
+        "type": "Achat",
+        "quantity": 3,
+        "amount": 255.16,
+        "fees": 0,
+        "currency": "EUR",
+        "note": "ISHARES ESTOXX MID (IE00B02KXL92)",
+        "isin": "IE00B02KXL92"
+      },
+      {
+        "id": 54,
+        "date": "2026-02-28",
+        "asset": "iShares EURO STOXX Mid UCITS ETF",
+        "ticker": "ISHARES ESTOXX MID",
+        "type": "Achat",
+        "quantity": 1,
+        "amount": 85.07,
+        "fees": 0,
+        "currency": "EUR",
+        "note": "ISHARES ESTOXX MID (IE00B02KXL92)",
+        "isin": "IE00B02KXL92"
+      },
+      {
+        "id": 53,
+        "date": "2026-02-28",
+        "asset": "Vanguard S&P 500 UCITS ETF USD Accumulation",
+        "ticker": "VANGUARD SP500 ETF",
+        "type": "Achat",
+        "quantity": 4,
+        "amount": 447.12,
+        "fees": 0,
+        "currency": "EUR",
+        "note": "VANGUARD SP500 ETF (IE00B3XXRP09)",
+        "isin": "IE00B3XXRP09"
+      },
+      {
+        "id": 52,
+        "date": "2026-02-28",
+        "asset": "Cash",
+        "ticker": "CASH",
+        "type": "Dépôt",
+        "quantity": null,
+        "amount": 1200,
+        "fees": 0,
+        "currency": "EUR",
+        "note": "3ème versement - membres"
+      },
+      {
+        "id": 39,
+        "date": "2026-01-30",
+        "asset": "Cash",
+        "ticker": "CASH",
+        "type": "Dépôt",
+        "quantity": null,
+        "amount": 1200,
+        "fees": 0,
+        "currency": "EUR",
+        "note": "2ème versement - membres"
+      },
+      {
+        "id": 26,
+        "date": "2025-12-30",
+        "asset": "Cash",
+        "ticker": "CASH",
+        "type": "Dépôt",
+        "quantity": null,
+        "amount": 800,
+        "fees": 0,
+        "currency": "EUR",
+        "note": "1er versement - membres"
+      },
+      {
+        "id": 13,
+        "date": "2025-11-01",
+        "asset": "Cash",
+        "ticker": "CASH",
+        "type": "Dépôt",
+        "quantity": null,
+        "amount": 3300,
+        "fees": 0,
+        "currency": "EUR",
+        "note": "Cotisation d'entrée - membres"
+      }
+    ],
+    "cash": {
+      "eur": 6882.05,
+      "usd": 0,
+      "deposits": 9900
+    },
+    "documents": [
+      {
+        "id": 1,
+        "category": "Reporting",
+        "title": "Bilan du club",
+        "description": "20/03/2026",
+        "uploadedBy": "board_admin",
+        "uploadedAt": "2026-03-20",
+        "fileName": "Ãtat de versement -Tableau 1.csv",
+        "storedName": "1774050043474-__tat_de_versement_-Tableau_1.csv",
+        "mimeType": "text/csv",
+        "size": 1847
+      }
+    ]
+  }
+}

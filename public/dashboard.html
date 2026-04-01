@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mosaique Investment Club — Portfolio Tracker</title>
+  <style>
+    :root { --bg:#f1ede7; --bg-soft:#f7f3ee; --panel:rgba(255,255,255,0.72); --text:#171411; --muted:#6d655d; --line:rgba(23,20,17,0.10); --deep:#181614; --bronze:#8c6a43; --bronze-soft:rgba(140,106,67,0.10); --success:#1f7a4e; --danger:#9d3f33; --shadow:0 24px 70px rgba(24,22,20,0.10);}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh;color:var(--text);background:radial-gradient(circle at top left, rgba(140,106,67,0.08), transparent 24%),radial-gradient(circle at bottom right, rgba(24,22,20,0.05), transparent 26%),linear-gradient(135deg, var(--bg) 0%, var(--bg-soft) 100%);padding:22px}
+    .app{min-height:calc(100vh - 44px);max-width:1520px;margin:0 auto;display:grid;grid-template-columns:300px 1fr;gap:18px}
+    .sidebar{background:linear-gradient(180deg, rgba(24,22,20,0.98), rgba(24,22,20,0.94));color:#f8f3ec;border-radius:34px;padding:26px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:24px}
+    .brand{display:flex;align-items:center;gap:14px;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,0.08)}
+    .logo{width:56px;height:56px;border-radius:18px;background:linear-gradient(135deg, #9c7850, #6f5232);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.92rem;letter-spacing:.12em;box-shadow:0 16px 34px rgba(140,106,67,0.28)}
+    .brand h1{font-size:1.02rem;font-weight:700;margin-bottom:3px}.brand p{font-size:.84rem;color:rgba(248,243,236,0.62);line-height:1.5}
+    .nav-title{font-size:.74rem;text-transform:uppercase;letter-spacing:.12em;color:rgba(248,243,236,0.42);margin-bottom:8px;padding-left:8px}
+    .nav{display:grid;gap:8px}
+    .nav-btn{width:100%;border:none;background:transparent;color:rgba(248,243,236,0.84);display:flex;align-items:center;gap:12px;padding:14px 14px;border-radius:16px;text-align:left;cursor:pointer;font-size:.95rem;font-weight:500}
+    .nav-btn:hover,.nav-btn.active{background:rgba(255,255,255,0.08);color:#fff}
+    .nav-icon{width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.9rem}
+    .sidebar-card{margin-top:auto;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:22px;padding:18px}
+    .sidebar-card small{display:block;color:rgba(248,243,236,0.50);text-transform:uppercase;letter-spacing:.08em;font-size:.72rem;margin-bottom:10px}
+    .sidebar-card h3{font-size:1rem;margin-bottom:8px}.sidebar-card p{color:rgba(248,243,236,0.68);font-size:.88rem;line-height:1.6}
+    .main{display:flex;flex-direction:column;gap:18px}
+    .topbar{background:rgba(255,255,255,0.46);border:1px solid rgba(255,255,255,0.7);border-radius:28px;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;gap:16px;box-shadow:var(--shadow);backdrop-filter:blur(14px);flex-wrap:wrap}
+    .topbar h2{font-family:Georgia,"Times New Roman",serif;font-size:2rem;font-weight:600;letter-spacing:-.04em;margin-bottom:4px}
+    .topbar p{color:var(--muted);font-size:.92rem}.topbar-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .user-chip{padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,0.65);font-size:.9rem;color:var(--muted)}
+    .btn{border:1px solid var(--line);background:rgba(255,255,255,0.7);color:var(--text);height:46px;border-radius:14px;padding:0 16px;font-weight:600;cursor:pointer;transition:all .18s ease}
+    .btn:hover{transform:translateY(-1px)}.btn.primary{background:linear-gradient(135deg,#181614,#2b2722);color:#f8f3ec;border:none;box-shadow:0 14px 28px rgba(24,22,20,0.12)}
+    .page{display:none;gap:18px}.page.active{display:grid}
+    .cards-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.split-2{display:grid;grid-template-columns:1.45fr .95fr;gap:16px}
+    .card{background:var(--panel);border:1px solid rgba(255,255,255,0.74);border-radius:26px;padding:22px;box-shadow:var(--shadow);backdrop-filter:blur(14px)}
+    .card h3{font-size:1.02rem;margin-bottom:6px}.sub{color:var(--muted);font-size:.9rem;margin-bottom:18px;line-height:1.6}
+    .metric-label{color:var(--muted);font-size:.84rem;margin-bottom:12px;text-transform:uppercase;letter-spacing:.08em}.metric-value{font-size:1.9rem;font-weight:700;letter-spacing:-.04em;margin-bottom:8px}.metric-foot{color:var(--muted);font-size:.86rem}
+    .up{color:var(--success)}.down{color:var(--danger)}
+    .section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+    .form-grid{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:12px;align-items:end}
+    .form-grid-doc{display:grid;grid-template-columns:1.2fr 1fr 1.2fr 1.1fr auto;gap:12px;align-items:end}
+    .form-grid-tx{display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1.4fr auto;gap:12px;align-items:end}
+    .field-label{display:block;margin-bottom:8px;font-size:.84rem;font-weight:700;color:#2e2924}
+    .field-input,.field-select{width:100%;height:48px;border-radius:14px;border:1px solid rgba(23,20,17,0.09);background:rgba(255,255,255,0.92);padding:0 14px;font-size:.94rem;color:var(--text);outline:none}
+    .search-results{margin-top:14px;display:grid;gap:8px}.selected-row{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}.selected-text{opacity:.82}
+    table{width:100%;border-collapse:collapse} thead th{text-align:left;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding-bottom:14px} tbody td{padding:16px 0;border-top:1px solid var(--line);font-size:.92rem;vertical-align:middle}
+    .asset{display:flex;align-items:center;gap:12px}.asset-badge{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#efe6d8,#fff);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:.86rem;font-weight:700}
+    .asset-name{font-weight:700;margin-bottom:2px}.asset-sub{color:var(--muted);font-size:.82rem}
+    .tag{display:inline-flex;align-items:center;padding:8px 10px;border-radius:999px;background:var(--bronze-soft);color:var(--bronze);font-size:.76rem;font-weight:700}
+    .mini-item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 16px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,0.6)} .mini-item strong{display:block;margin-bottom:4px;font-size:.94rem}.mini-item span{color:var(--muted);font-size:.84rem}.mini-item.compact{padding:12px 14px}.result-item{cursor:pointer}
+    .market-badge{display:inline-flex;align-items:center;padding:10px 12px;border-radius:999px;background:rgba(255,255,255,0.72);border:1px solid rgba(23,20,17,0.08);color:var(--muted);font-size:.82rem;font-weight:600}
+    .range-group{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.range-btn{border:1px solid rgba(23,20,17,0.10);background:rgba(255,255,255,0.76);height:40px;border-radius:12px;padding:0 14px;font-weight:600;cursor:pointer}.range-btn.active{background:linear-gradient(135deg,#181614,#2b2722);color:#f8f3ec;border:none}
+    .chart-card-shell{display:grid;gap:14px}.chart-svg{width:100%;height:340px;border-radius:20px;border:1px solid var(--line);background:linear-gradient(180deg, rgba(140,106,67,0.08), rgba(140,106,67,0.01)),repeating-linear-gradient(to right, rgba(23,20,17,0.05) 0, rgba(23,20,17,0.05) 1px, transparent 1px, transparent 72px),repeating-linear-gradient(to bottom, rgba(23,20,17,0.05) 0, rgba(23,20,17,0.05) 1px, transparent 1px, transparent 58px)}
+    .chart-line-main{stroke:#8c6a43;stroke-width:4.5;stroke-linecap:round;stroke-linejoin:round}.chart-line{stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;opacity:.9}.chart-line-alt-1{stroke:#1f7a4e}.chart-line-alt-2{stroke:#9d3f33}.chart-line-alt-3{stroke:#6b5ce7}.chart-line-alt-4{stroke:#3e7dbb}
+    .chart-legend{display:flex;gap:12px;flex-wrap:wrap;align-items:center}.legend-item{display:inline-flex;align-items:center;gap:8px;font-size:.84rem;color:var(--muted);background:rgba(255,255,255,0.62);border:1px solid rgba(23,20,17,0.08);border-radius:999px;padding:8px 12px}.legend-dot{width:10px;height:10px;border-radius:999px;display:inline-block}.legend-dot.main{background:#8c6a43}.legend-dot.alt-1{background:#1f7a4e}.legend-dot.alt-2{background:#9d3f33}.legend-dot.alt-3{background:#6b5ce7}.legend-dot.alt-4{background:#3e7dbb}
+    .doc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.doc-card{border:1px solid var(--line);background:rgba(255,255,255,0.62);border-radius:22px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;min-height:235px;box-shadow:0 14px 36px rgba(24,22,20,0.06)}
+    .doc-card-top{display:flex;flex-direction:column}.doc-card small{display:block;color:var(--bronze);text-transform:uppercase;letter-spacing:.08em;font-size:.72rem;margin-bottom:12px;font-weight:700}.doc-card h4{font-size:1.15rem;margin-bottom:10px;line-height:1.3}.doc-card p{color:var(--muted);font-size:.92rem;line-height:1.65;margin-bottom:14px}.doc-meta{color:var(--muted);font-size:.82rem;margin-top:6px;line-height:1.5}.doc-card-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center}
+    .small-btn{border:none;height:42px;border-radius:14px;padding:0 16px;background:linear-gradient(135deg,#181614,#2b2722);color:#f8f3ec;font-weight:600;font-size:.86rem;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;transition:all .18s ease;box-shadow:0 10px 22px rgba(24,22,20,0.12)} .small-btn:hover{transform:translateY(-1px);box-shadow:0 14px 28px rgba(24,22,20,0.18)} .small-btn.danger{background:rgba(157,63,51,0.08);color:#9d3f33;border:1px solid rgba(157,63,51,0.22);box-shadow:none}.small-btn.ghost{visibility:hidden;pointer-events:none}
+    .card.table-card {
+      overflow-x: auto;
+    }
+
+    .portfolio-table {
+      width: 100%;
+      min-width: 1280px;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .portfolio-table thead th {
+      text-align: left;
+      font-size: .74rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--muted);
+      padding-bottom: 16px;
+      white-space: nowrap;
+    }
+
+    .portfolio-table tbody td {
+      padding: 18px 8px 18px 0;
+      border-top: 1px solid var(--line);
+      font-size: .92rem;
+      vertical-align: middle;
+    }
+
+    .portfolio-table th:nth-child(1),
+    .portfolio-table td:nth-child(1) { width: 34%; }
+
+    .portfolio-table th:nth-child(2),
+    .portfolio-table td:nth-child(2) { width: 10%; }
+
+    .portfolio-table th:nth-child(3),
+    .portfolio-table td:nth-child(3) { width: 10%; }
+
+    .portfolio-table th:nth-child(4),
+    .portfolio-table td:nth-child(4) { width: 10%; }
+
+    .portfolio-table th:nth-child(5),
+    .portfolio-table td:nth-child(5) { width: 10%; }
+
+    .portfolio-table th:nth-child(6),
+    .portfolio-table td:nth-child(6) { width: 12%; }
+
+    .portfolio-table th:nth-child(7),
+    .portfolio-table td:nth-child(7) { width: 8%; }
+
+    .portfolio-table th:nth-child(8),
+    .portfolio-table td:nth-child(8) { width: 6%; }
+
+    .portfolio-table th:nth-child(9),
+    .portfolio-table td:nth-child(9) { width: 12%; }
+
+    .nowrap {
+      white-space: nowrap;
+    }
+    .empty-documents{grid-column:1/-1;background:var(--panel);border:1px solid rgba(255,255,255,0.74);border-radius:22px;padding:28px;color:var(--muted);text-align:center;box-shadow:var(--shadow)}
+    @media (max-width:1320px){.cards-4,.split-2,.doc-grid{grid-template-columns:1fr}.form-grid,.form-grid-doc,.form-grid-tx{grid-template-columns:1fr}}
+    @media (max-width:1060px){.app{grid-template-columns:1fr}.sidebar{padding:20px}}
+    @media (max-width:760px){body{padding:12px}.topbar h2{font-size:1.6rem}.cards-4{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><div class="logo">MIC</div><div><h1>Mosaique Investment Club</h1><p>Portfolio tracker privé du club</p></div></div>
+      <div><div class="nav-title">Navigation</div><div class="nav">
+        <button class="nav-btn active" data-page="portfolio"><span class="nav-icon">◎</span>Portfolio</button>
+        <button class="nav-btn" data-page="transactions"><span class="nav-icon">↹</span>Transactions</button>
+        <button class="nav-btn" data-page="documents"><span class="nav-icon">▣</span>Documents</button>
+      </div></div>
+      <div class="sidebar-card"><small>Mosaique Investment Club</small><h3>Espace de suivi du club</h3><p></p></div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div><h2 id="page-title">Portfolio</h2><p id="page-subtitle">Positions détenues, poids, valorisation et performances par ligne.</p></div>
+        <div class="topbar-actions">
+          <span class="market-badge" id="market-badge">Marché</span>
+          <div class="user-chip" id="user-context"></div>
+          <button class="btn" onclick="logout()">Déconnexion</button>
+          <button class="btn primary" onclick="exportTransactionsCsv()">Exporter CSV</button>
+        </div>
+      </header>
+
+      <section class="page active" id="portfolio-page">
+        <div class="cards-4">
+          <article class="card table-card"><div class="metric-label">Valeur totale</div><div class="metric-value" id="metric-total-value">-</div><div class="metric-foot">Valeur globale du club</div></article>
+          <article class="card table-card"><div class="metric-label">P/L latente</div><div class="metric-value up" id="metric-unrealized">-</div><div class="metric-foot">Plus-value / moins-value non réalisée</div></article>
+          <article class="card table-card"><div class="metric-label">Valeur du portefeuille</div><div class="metric-value" id="metric-portfolio-value">-</div><div class="metric-foot">Valeur des positions détenues hors trésorerie</div></article>
+          <article class="card table-card"><div class="metric-label">Trésorerie disponible</div><div class="metric-value" id="metric-cash">-</div><div class="metric-foot">Liquidités non investies</div></article>
+        </div>
+
+        <div class="split-2">
+          <article class="card table-card">
+            <div class="section-head"><div><h3>Évolution du portefeuille et des actifs</h3><p class="sub">Courbe globale du portefeuille avec les principales lignes du club.</p></div>
+              <div class="range-group">
+                <button class="range-btn" data-range="1mo" onclick="loadChart('1mo')">1M</button>
+                <button class="range-btn active" data-range="3mo" onclick="loadChart('3mo')">3M</button>
+                <button class="range-btn" data-range="6mo" onclick="loadChart('6mo')">6M</button>
+              </div>
+            </div>
+            <div id="chart-wrapper"></div>
+          </article>
+          <article class="card table-card"><h3>Répartition rapide</h3><p class="sub">Allocation actuelle entre ETF, actions et cash.</p><div id="allocation-list" style="display:grid;gap:10px;"></div></article>
+        </div>
+
+        <article class="card" data-board-only>
+          <div class="section-head"><div><h3>Ajouter une position</h3><p class="sub">Recherche par nom, ticker ou ISIN Yahoo sans modifier le code.</p></div></div>
+          <div class="form-grid">
+            <div><label class="field-label">Recherche instrument</label><input id="instrument-query" class="field-input" type="text" placeholder="Ex: Tesla, CW8, IE00B3XXRP09, BNP" /></div>
+            <div><label class="field-label">Quantité</label><input id="position-quantity" class="field-input" type="number" step="any" placeholder="10" /></div>
+            <div><label class="field-label">Prix moyen d'achat</label><input id="position-avg-price" class="field-input" type="number" step="any" placeholder="125.40" /></div>
+            <div><label class="field-label">Action</label><button class="small-btn" onclick="searchInstruments()">Rechercher</button></div>
+          </div>
+          <div id="instrument-results" class="search-results"></div>
+          <div class="selected-row"><div id="selected-instrument" class="selected-text">Aucun instrument sélectionné</div><button class="small-btn" onclick="addSelectedPosition()">Ajouter la position</button></div>
+        </article>
+
+        <article class="card table-card"><h3>Positions du portefeuille</h3><p class="sub">Vue détaillée des lignes détenues par le club.</p>
+          <table class="portfolio-table"><thead><tr><th>Actif</th><th>Quantité</th><th>Prix moyen</th><th>Prix actuel</th><th>Valeur</th><th>Performance</th><th>Poids</th><th>Jour</th><th data-board-only>Action</th></tr></thead><tbody id="portfolio-body"></tbody></table>
+        </article>
+      </section>
+
+      <section class="page" id="transactions-page">
+        <article class="card" data-board-only>
+          <div class="section-head"><div><h3>Ajouter une transaction</h3><p class="sub">Achat, vente, dépôt, dividende ou frais.</p></div></div>
+          <div class="form-grid-tx">
+            <div><label class="field-label">Date</label><input id="tx-date" class="field-input" type="date" /></div>
+            <div><label class="field-label">Actif</label><input id="tx-asset" class="field-input" type="text" placeholder="CW8" /></div>
+            <div><label class="field-label">Ticker</label><input id="tx-ticker" class="field-input" type="text" placeholder="VUAA.L" /></div>
+            <div><label class="field-label">Type</label><select id="tx-type" class="field-select"><option>Achat</option><option>Vente</option><option>Dépôt</option><option>Dividende</option><option>Frais</option></select></div>
+            <div><label class="field-label">Quantité</label><input id="tx-quantity" class="field-input" type="number" step="any" placeholder="2" /></div>
+            <div><label class="field-label">Montant</label><input id="tx-amount" class="field-input" type="number" step="any" placeholder="1024.20" /></div>
+            <div><label class="field-label">Note</label><input id="tx-note" class="field-input" type="text" placeholder="Commentaire" /></div>
+            <div><label class="field-label">Action</label><button class="small-btn" onclick="addTransaction()">Ajouter</button></div>
+          </div>
+          <div style="margin-top:12px;max-width:220px;"><label class="field-label">Frais</label><input id="tx-fees" class="field-input" type="number" step="any" placeholder="0.00" /></div>
+        </article>
+
+        <article class="card table-card"><h3>Historique des transactions</h3><p class="sub">Achats, ventes, dépôts, dividendes et frais importés depuis le suivi du club.</p>
+          <table class="portfolio-table"><thead><tr><th>Date</th><th>Actif</th><th>Type</th><th>Quantité</th><th>Montant</th><th>Frais</th><th>Note</th></tr></thead><tbody id="transactions-body"></tbody></table>
+        </article>
+      </section>
+
+      <section class="page" id="documents-page">
+        <article class="card" data-board-only>
+          <div class="section-head"><div><h3>Importer un document</h3><p class="sub">Ajoute un vrai fichier depuis ton ordinateur pour qu’il soit consultable par le club.</p></div></div>
+          <div class="form-grid-doc">
+            <div><label class="field-label">Titre</label><input id="doc-title" class="field-input" type="text" placeholder="PV de réunion" /></div>
+            <div><label class="field-label">Catégorie</label><input id="doc-category" class="field-input" type="text" value="Reporting" /></div>
+            <div><label class="field-label">Description</label><input id="doc-description" class="field-input" type="text" placeholder="Description courte" /></div>
+            <div><label class="field-label">Fichier</label><input id="doc-file" class="field-input" type="file" accept=".pdf,.csv,.doc,.docx,.xls,.xlsx,.txt,.png,.jpg,.jpeg" /></div>
+            <div><label class="field-label">Action</label><button class="small-btn" onclick="uploadDocument()">Importer</button></div>
+          </div>
+          <div style="margin-top:12px;">
+            <label class="field-label">Contenu texte optionnel</label>
+            <textarea id="doc-content" class="field-input" style="height:120px;padding:14px;resize:vertical;" placeholder="Tu peux aussi écrire un document interne directement ici, sans fichier."></textarea>
+          </div>
+        </article>
+        <div class="doc-grid" id="documents-grid"></div>
+      </section>
+    </main>
+  </div>
+  <script src="/app.js"></script>
+</body>
+</html>
