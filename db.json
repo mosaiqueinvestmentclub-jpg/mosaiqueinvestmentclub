@@ -23,39 +23,75 @@
     "positions": [
       {
         "id": 4,
-        "name": "iShares MSCI AC Far East ex-Japan UCITS ETF USD",
+        "name": "iShares EURO STOXX Mid UCITS ET",
+        "ticker": "DJMC.AS",
+        "yahooSymbol": "DJMC.AS",
+        "type": "ETF",
+        "currency": "EUR",
+        "quantity": 4,
+        "avgPrice": 84.63,
+        "isin": ""
+      },
+      {
+        "id": 5,
+        "name": "iShares MSCI AC Far East ex Jap",
         "ticker": "IFFF.AS",
         "yahooSymbol": "IFFF.AS",
         "type": "ETF",
         "currency": "EUR",
-        "quantity": 1,
-        "avgPrice": 1,
-        "isin": "IE00B0M63730"
+        "quantity": 16,
+        "avgPrice": 70.37,
+        "isin": ""
       },
       {
-        "id": 5,
-        "name": "iShares EURO STOXX Mid UCITS ETF",
-        "ticker": "DJMC.SW",
-        "yahooSymbol": "DJMC.SW",
+        "id": 7,
+        "name": "Vanguard S&P 500 UCITS ETF",
+        "ticker": "VUSA.AS",
+        "yahooSymbol": "VUSA.AS",
         "type": "ETF",
         "currency": "EUR",
-        "quantity": 1,
-        "avgPrice": 1,
-        "isin": "IE00B02KXL92"
-      },
-      {
-        "id": 6,
-        "name": "BNP Paribas Funds Brazil Equity",
-        "ticker": "0P00007ZH9",
-        "yahooSymbol": "0P00007ZH9",
-        "type": "MUTUALFUND",
-        "currency": "USD",
-        "quantity": 1,
-        "avgPrice": 91.32,
+        "quantity": 20,
+        "avgPrice": 110.06,
         "isin": ""
       }
     ],
     "transactions": [
+      {
+        "id": 79,
+        "date": "2026-04-18",
+        "asset": "Vanguard S&P 500 UCITS ETF USD Accumulation",
+        "ticker": "VANGUARD S&P 500 UCITS ETF USD ACCUMULATION",
+        "type": "Dépôt",
+        "quantity": 1,
+        "amount": 3.28,
+        "fees": 0,
+        "currency": "EUR",
+        "note": "COUPONS VANGUARD SP500 ETF (IE00B3XXRP09)"
+      },
+      {
+        "id": 78,
+        "date": "2026-04-18",
+        "asset": "28/02/2026\tiShares EURO STOXX Mid UCITS ETF",
+        "ticker": "28/02/2026\tISHARES EURO STOXX MID UCITS ETF",
+        "type": "Dépôt",
+        "quantity": 1,
+        "amount": 0.14,
+        "fees": 0,
+        "currency": "EUR",
+        "note": "COUPONS ISHARES ESTOXX MID (IE00B02KXL92)"
+      },
+      {
+        "id": 77,
+        "date": "2026-04-18",
+        "asset": "28/02/2026\tiShares MSCI AC Far East ex-Japan UCITS ETF USD",
+        "ticker": "28/02/2026\tISHARES MSCI AC FAR EAST EX-JAPAN UCITS ETF USD",
+        "type": "Dépôt",
+        "quantity": 1,
+        "amount": 0.92,
+        "fees": 0,
+        "currency": "EUR",
+        "note": "COUPONS 1,00 MSCI AC FAR EAST (IE00B0M63730)"
+      },
       {
         "id": 76,
         "date": "2026-03-20",
@@ -234,9 +270,9 @@
       }
     ],
     "cash": {
-      "eur": 6882.05,
+      "eur": 6886.39,
       "usd": 0,
-      "deposits": 9900
+      "deposits": 11004.34
     },
     "documents": [
       {
